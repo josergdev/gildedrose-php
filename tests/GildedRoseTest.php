@@ -8,6 +8,10 @@ use GildedRose\GildedRose;
 use GildedRose\Item;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @covers \GildedRose\GildedRose
+ * @covers \GildedRose\Item
+ */
 class GildedRoseTest extends TestCase
 {
 
