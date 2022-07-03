@@ -18,44 +18,18 @@ final class GildedRose implements QualityUpdatable
 
     public function updateQuality(): void
     {
-        foreach ($this->items as $item) {
-            $this->updateQualityOfItem($item);
+        $qualityUpdatables = array_map(
+            fn(Item $item) => match($item->name) {
+                'Sulfuras, Hand of Ragnaros' => new SulfurasItem($item),
+                'Aged Brie' => new AgedBrieItem($item),
+                'Backstage passes to a TAFKAL80ETC concert' => new BackstageItem($item),
+                default => new NormalItem($item)
+            },
+            $this->items
+        );
+
+        foreach ($qualityUpdatables as $qualityUpdatable) {
+            $qualityUpdatable->updateQuality();
         }
-    }
-
-    private function updateQualityOfItem(Item $item): void
-    {
-        if ($this->isSulfurasItem($item)) {
-            (new SulfurasItem($item))->updateQuality();
-            return;
-        }
-
-        if ($this->isAgedBrieItem($item)) {
-            (new AgedBrieItem($item))->updateQuality();
-            return;
-        }
-
-        if ($this->isBackstageItem($item)) {
-            (new BackstageItem($item))->updateQuality();
-            return;
-        }
-
-        (new NormalItem($item))->updateQuality();
-    }
-
-    private function isSulfurasItem(Item $item): bool
-    {
-        return $item->name === 'Sulfuras, Hand of Ragnaros';
-    }
-
-    private function isAgedBrieItem(Item $item): bool
-    {
-        return $item->name === 'Aged Brie';
-    }
-
-    private function isBackstageItem(Item $item): bool
-    {
-        return $item->name === 'Backstage passes to a TAFKAL80ETC concert';
     }
 }
-
