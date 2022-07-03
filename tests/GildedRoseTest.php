@@ -42,10 +42,10 @@ class GildedRoseTest extends TestCase
             new Item('Normal Item', 2, 0),
             new Item('Normal Item', -2, 0),
             new Item('Aged Brie', 2, 0),
-            new Item('Sulfuras', 2, 0),
-            new Item('Backstage passes', 0, 0),
-            new Item('Backstage passes', 5, 0),
-            new Item('Backstage passes', 10, 0),
+            new Item('Sulfuras, Hand of Ragnaros', 2, 0),
+            new Item('Backstage passes to a TAFKAL80ETC concert', 0, 0),
+            new Item('Backstage passes to a TAFKAL80ETC concert', 5, 0),
+            new Item('Backstage passes to a TAFKAL80ETC concert', 10, 0),
         ];
         $gildedRose = new GildedRose($items);
 
@@ -63,13 +63,13 @@ class GildedRoseTest extends TestCase
             new Item('Normal Item', -2, 50),
             new Item('Aged Brie', 2, 49),
             new Item('Aged Brie', -2, 50),
-            new Item('Sulfuras', 2, 50),
-            new Item('Backstage passes', 0, 50),
-            new Item('Backstage passes', 5, 50),
-            new Item('Backstage passes', 10, 50),
-            new Item('Backstage passes', 0, 49),
-            new Item('Backstage passes', 5, 49),
-            new Item('Backstage passes', 10, 49),
+            new Item('Sulfuras, Hand of Ragnaros', 2, 50),
+            new Item('Backstage passes to a TAFKAL80ETC concert', 0, 50),
+            new Item('Backstage passes to a TAFKAL80ETC concert', 5, 50),
+            new Item('Backstage passes to a TAFKAL80ETC concert', 10, 50),
+            new Item('Backstage passes to a TAFKAL80ETC concert', 0, 49),
+            new Item('Backstage passes to a TAFKAL80ETC concert', 5, 49),
+            new Item('Backstage passes to a TAFKAL80ETC concert', 10, 49),
         ];
         $gildedRose = new GildedRose($items);
 
@@ -78,5 +78,19 @@ class GildedRoseTest extends TestCase
         foreach ($items as $item) {
             $this->assertLessThanOrEqual(50, $item->quality, $item->__toString());
         }
+    }
+
+    public function test_it_should_increase_quality_when_it_is_an_aged_brie_item(): void
+    {
+        $items = [
+            new Item('Aged Brie', 5, 49),
+        ];
+        $gildedRose = new GildedRose($items);
+
+        $gildedRose->updateQuality();
+
+        $this->assertSame('Aged Brie', $items[0]->name);
+        $this->assertSame(4,  $items[0]->sell_in);
+        $this->assertSame(50,  $items[0]->quality);
     }
 }
