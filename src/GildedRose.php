@@ -35,30 +35,7 @@ final class GildedRose implements QualityUpdatable
         }
 
         if ($this->isBackstageItem($item)) {
-            if ($item->quality < 50) {
-                $item->quality = $item->quality + 1;
-
-                if ($item->sell_in < 11) {
-                    if ($item->quality < 50) {
-                        $item->quality = $item->quality + 1;
-                    }
-                }
-
-                if ($item->sell_in < 6) {
-                    if ($item->quality < 50) {
-                        $item->quality = $item->quality + 1;
-                    }
-                }
-            }
-
-            $item->sell_in = $item->sell_in - 1;
-
-            if ($item->sell_in >= 0) {
-                return;
-            }
-
-            $item->quality = 0;
-
+            (new BackstageItem($item))->updateQuality();
             return;
         }
 
