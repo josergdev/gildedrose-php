@@ -80,7 +80,7 @@ class GildedRoseTest extends TestCase
         }
     }
 
-    public function provideAgedBrieCases(): array
+    public function provideAgedBrieIncreasingQualityCases(): array
     {
         return [
             ['Aged Brie, 4, 50', new Item('Aged Brie', 5, 49)],
@@ -92,7 +92,7 @@ class GildedRoseTest extends TestCase
     }
 
     /**
-     * @dataProvider provideAgedBrieCases
+     * @dataProvider provideAgedBrieIncreasingQualityCases
      */
     public function test_it_should_increase_quality_when_it_is_an_aged_brie(string $expectedOutput, Item $inputAgedBrieItem): void
     {
