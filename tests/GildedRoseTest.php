@@ -11,12 +11,10 @@ use PHPUnit\Framework\TestCase;
 /**
  * @covers \GildedRose\GildedRose
  * @covers \GildedRose\Item
- * @covers \GildedRose\NormalItem
- * @covers \GildedRose\AgedBrieItem
  * @covers \GildedRose\BackstageItem
- * @covers \GildedRose\SulfurasItem
+ * @covers \GildedRose\LegendaryItem
  * @covers \GildedRose\ConjuredItem
- * @covers \GildedRose\DecreasingItem
+ * @covers \GildedRose\VelocityItem
  */
 class GildedRoseTest extends TestCase
 {

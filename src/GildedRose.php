@@ -20,11 +20,11 @@ final class GildedRose implements QualityUpdatable
     {
         $qualityUpdatables = array_map(
             fn(Item $item) => match($item->name) {
-                'Sulfuras, Hand of Ragnaros' => new SulfurasItem($item),
-                'Aged Brie' => new AgedBrieItem($item),
+                'Sulfuras, Hand of Ragnaros' => new LegendaryItem($item),
                 'Backstage passes to a TAFKAL80ETC concert' => new BackstageItem($item),
-                'Conjured Mana Cake' => new ConjuredItem($item),
-                default => new NormalItem($item)
+                'Aged Brie' => new VelocityItem($item, -1),
+                'Conjured Mana Cake' => new VelocityItem($item, 2),
+                default => new VelocityItem($item)
             },
             $this->items
         );

@@ -2,7 +2,7 @@
 
 namespace GildedRose;
 
-final class DecreasingItem implements QualityUpdatable
+final class VelocityItem implements QualityUpdatable
 {
     private Item $item;
     private int $velocity;
@@ -25,6 +25,10 @@ final class DecreasingItem implements QualityUpdatable
 
         if ($quality < 0) {
             $quality = 0;
+        }
+
+        if ($quality > 50) {
+            $quality  = 50;
         }
 
         $this->item->quality = $quality;
