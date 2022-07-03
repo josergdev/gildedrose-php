@@ -26,6 +26,7 @@ final class GildedRose implements QualityUpdatable
     private function updateQualityOfItem(Item $item): void
     {
         if ($this->isSulfurasItem($item)) {
+            (new SulfurasItem($item))->updateQuality();
             return;
         }
 

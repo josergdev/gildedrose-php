@@ -2,7 +2,7 @@
 
 namespace GildedRose;
 
-class AgedBrieItem implements QualityUpdatable
+final class AgedBrieItem implements QualityUpdatable
 {
     public function __construct(readonly private Item $item)
     {

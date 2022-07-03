@@ -2,7 +2,7 @@
 
 namespace GildedRose;
 
-class BackstageItem implements QualityUpdatable
+final class BackstageItem implements QualityUpdatable
 {
     public function __construct(readonly private Item $item)
     {
