@@ -67,6 +67,9 @@ class GildedRoseTest extends TestCase
             new Item('Backstage passes', 0, 50),
             new Item('Backstage passes', 5, 50),
             new Item('Backstage passes', 10, 50),
+            new Item('Backstage passes', 0, 49),
+            new Item('Backstage passes', 5, 49),
+            new Item('Backstage passes', 10, 49),
         ];
         $gildedRose = new GildedRose($items);
 
