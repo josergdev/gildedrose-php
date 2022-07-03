@@ -2,20 +2,21 @@
 
 namespace GildedRose;
 
-final class NormalItem implements QualityUpdatable
+class ConjuredItem implements QualityUpdatable
 {
-    public function __construct(readonly private Item $item)
+    public function __construct(private readonly Item $item)
     {
     }
+
 
     public function updateQuality(): void
     {
         $quality = $this->item->quality;
 
         if ($this->item->sell_in >= 1) {
-            $quality -= 1;
-        } else {
             $quality -= 2;
+        } else {
+            $quality -= 4;
         }
 
         if ($quality < 0) {

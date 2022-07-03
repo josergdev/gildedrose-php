@@ -15,6 +15,7 @@ use PHPUnit\Framework\TestCase;
  * @covers \GildedRose\AgedBrieItem
  * @covers \GildedRose\BackstageItem
  * @covers \GildedRose\SulfurasItem
+ * @covers \GildedRose\ConjuredItem
  */
 class GildedRoseTest extends TestCase
 {
@@ -140,7 +141,6 @@ class GildedRoseTest extends TestCase
         $this->assertSame($expectedOutput, $items[0]->__toString());
     }
 
-
     public function provideBackstageCases()
     {
         $backStage = 'Backstage passes to a TAFKAL80ETC concert';
@@ -165,6 +165,36 @@ class GildedRoseTest extends TestCase
     public function test_it_should_update_quality_when_it_is_backstage_depending_on_sell_in(string $expectedOutput, Item $inputBackstageItem): void
     {
         $items = [$inputBackstageItem];
+        $gildedRose = new GildedRose($items);
+
+        $gildedRose->updateQuality();
+
+        $this->assertSame($expectedOutput, $items[0]->__toString());
+    }
+
+
+    public function provideConjuredCases()
+    {
+        return
+            [
+                ['Conjured Mana Cake, 0, 8',  new Item('Conjured Mana Cake', 1, 10)],
+                ['Conjured Mana Cake, -1, 6', new Item('Conjured Mana Cake', 0, 10)],
+                ['Conjured Mana Cake, -2, 6', new Item('Conjured Mana Cake', -1, 10)],
+                ['Conjured Mana Cake, -1, 1',  new Item('Conjured Mana Cake', 0, 5)],
+                ['Conjured Mana Cake, -1, 0',  new Item('Conjured Mana Cake', 0, 4)],
+                ['Conjured Mana Cake, -1, 0',  new Item('Conjured Mana Cake', 0, 3)],
+                ['Conjured Mana Cake, -1, 0',  new Item('Conjured Mana Cake', 0, 2)],
+                ['Conjured Mana Cake, -1, 0',  new Item('Conjured Mana Cake', 0, 1)],
+            ];
+    }
+
+    /**
+     * @skip
+     * @dataProvider provideConjuredCases
+     */
+    public function test_it_should_update_quality_when_it_is_conjured(string $expectedOutput, Item $inputConjuredItem): void
+    {
+        $items = [$inputConjuredItem];
         $gildedRose = new GildedRose($items);
 
         $gildedRose->updateQuality();

@@ -23,6 +23,7 @@ final class GildedRose implements QualityUpdatable
                 'Sulfuras, Hand of Ragnaros' => new SulfurasItem($item),
                 'Aged Brie' => new AgedBrieItem($item),
                 'Backstage passes to a TAFKAL80ETC concert' => new BackstageItem($item),
+                'Conjured Mana Cake' => new ConjuredItem($item),
                 default => new NormalItem($item)
             },
             $this->items
