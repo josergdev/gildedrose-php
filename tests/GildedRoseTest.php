@@ -18,29 +18,28 @@ use PHPUnit\Framework\TestCase;
  */
 class GildedRoseTest extends TestCase
 {
-
-    public function test_it_should_decrease_quality_of_normal_items_in_one_point(): void
+    public function provideNormalItemCases()
     {
-        $items = [new Item('Normal Item', 10, 10)];
-        $gildedRose = new GildedRose($items);
-
-        $gildedRose->updateQuality();
-
-        $this->assertSame('Normal Item', $items[0]->name);
-        $this->assertSame(9,  $items[0]->sell_in);
-        $this->assertSame(9,  $items[0]->quality);
+        return [
+            ['Normal Item, 9, 9', new Item('Normal Item', 10, 10)],
+            ['Normal Item, 0, 9', new Item('Normal Item', 1, 10)],
+            ['Normal Item, -1, 8', new Item('Normal Item', 0, 10)],
+            ['Normal Item, -2, 8', new Item('Normal Item', -1, 10)],
+            ['Normal Item, -2, 0', new Item('Normal Item', -1, 1)],
+        ];
     }
 
-    public function test_it_should_decrease_quality_of_normal_items_in_two_points_if_sell_date_has_passed(): void
+    /**
+     * @dataProvider provideNormalItemCases
+     */
+    public function test_it_should_decrease_quality_when_it_is_normal_item(string $expectedOutput, Item $inputNormalItem): void
     {
-        $items = [new Item('Normal Item', 0, 10)];
+        $items = [$inputNormalItem];
         $gildedRose = new GildedRose($items);
 
         $gildedRose->updateQuality();
 
-        $this->assertSame('Normal Item', $items[0]->name);
-        $this->assertSame(-1,  $items[0]->sell_in);
-        $this->assertSame(8,  $items[0]->quality);
+        $this->assertSame($expectedOutput, $items[0]->__toString());
     }
 
     public function test_it_should_not_decrease_quality_of_any_item_lower_than_zero(): void
