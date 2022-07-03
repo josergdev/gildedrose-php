@@ -16,6 +16,7 @@ use PHPUnit\Framework\TestCase;
  * @covers \GildedRose\BackstageItem
  * @covers \GildedRose\SulfurasItem
  * @covers \GildedRose\ConjuredItem
+ * @covers \GildedRose\DecreasingItem
  */
 class GildedRoseTest extends TestCase
 {
@@ -189,7 +190,6 @@ class GildedRoseTest extends TestCase
     }
 
     /**
-     * @skip
      * @dataProvider provideConjuredCases
      */
     public function test_it_should_update_quality_when_it_is_conjured(string $expectedOutput, Item $inputConjuredItem): void
