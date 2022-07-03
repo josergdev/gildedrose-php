@@ -104,20 +104,6 @@ class GildedRoseTest extends TestCase
         $this->assertSame($expectedOutput, $items[0]->__toString());
     }
 
-
-    /**
-     * @dataProvider provideSulfurasCases
-     */
-    public function test_it_should_not_decrease_quality_or_sell_in_when_it_is_sulfuras(string $expectedOutput, Item $inputSulfurasItem): void
-    {
-        $items = [$inputSulfurasItem];
-        $gildedRose = new GildedRose($items);
-
-        $gildedRose->updateQuality();
-
-        $this->assertSame($expectedOutput, $items[0]->__toString());
-    }
-
     public function provideSulfurasCases(): array
     {
         return [
@@ -130,5 +116,18 @@ class GildedRoseTest extends TestCase
             ['Sulfuras, Hand of Ragnaros, 0, 45', new Item('Sulfuras, Hand of Ragnaros', 0, 45)],
             ['Sulfuras, Hand of Ragnaros, -5, 45', new Item('Sulfuras, Hand of Ragnaros', -5, 45)],
         ];
+    }
+
+    /**
+     * @dataProvider provideSulfurasCases
+     */
+    public function test_it_should_not_decrease_quality_or_sell_in_when_it_is_sulfuras(string $expectedOutput, Item $inputSulfurasItem): void
+    {
+        $items = [$inputSulfurasItem];
+        $gildedRose = new GildedRose($items);
+
+        $gildedRose->updateQuality();
+
+        $this->assertSame($expectedOutput, $items[0]->__toString());
     }
 }
