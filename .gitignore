@@ -1,7 +1,2 @@
-bin
-obj
-*.sln.DotSettings.user
-.vs
-vendor
-.idea
-*.iml
+vendor/
+.phpunit.result.cache
