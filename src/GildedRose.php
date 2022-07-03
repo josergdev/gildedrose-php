@@ -25,15 +25,15 @@ final class GildedRose
 
     private function updateQualityOfItem(Item $item): void
     {
-        if ($item->name === 'Sulfuras, Hand of Ragnaros') {
+        if ($this->isSulfurasItem($item)) {
             return;
         }
 
-        if ($item->name != 'Aged Brie' and $item->name != 'Backstage passes to a TAFKAL80ETC concert') {
+        if ($this->isNormalItem($item)) {
             if ($item->quality > 0) {
                 $item->quality = $item->quality - 1;
             }
-        } else {
+        } else if ($this->isAgedBrieItem($item) or $this->isBackstageItem($item)) {
             if ($item->quality < 50) {
                 $item->quality = $item->quality + 1;
                 if ($item->name == 'Backstage passes to a TAFKAL80ETC concert') {
@@ -72,5 +72,27 @@ final class GildedRose
         if ($item->quality > 0) {
             $item->quality = $item->quality - 1;
         }
+    }
+
+    private function isSulfurasItem(Item $item): bool
+    {
+        return $item->name === 'Sulfuras, Hand of Ragnaros';
+    }
+
+    private function isNormalItem(Item $item): bool
+    {
+        return $item->name !== 'Sulfuras, Hand of Ragnaros'
+            and $item->name !== 'Aged Brie'
+            and $item->name !== 'Backstage passes to a TAFKAL80ETC concert';
+    }
+
+    private function isAgedBrieItem(Item $item): bool
+    {
+        return $item->name === 'Aged Brie';
+    }
+
+    private function isBackstageItem(Item $item): bool
+    {
+        return $item->name === 'Backstage passes to a TAFKAL80ETC concert';
     }
 }
