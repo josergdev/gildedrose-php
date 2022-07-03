@@ -10,28 +10,25 @@ final class BackstageItem implements QualityUpdatable
 
     public function updateQuality(): void
     {
-        if ($this->item->quality < 50) {
-            $this->item->quality = $this->item->quality + 1;
+        $quality = $this->item->quality + 1;
 
-            if ($this->item->sell_in < 11) {
-                if ($this->item->quality < 50) {
-                    $this->item->quality = $this->item->quality + 1;
-                }
-            }
-
-            if ($this->item->sell_in < 6) {
-                if ($this->item->quality < 50) {
-                    $this->item->quality = $this->item->quality + 1;
-                }
-            }
+        if ($this->item->sell_in < 11 ) {
+            $quality += 1;
         }
 
-        $this->item->sell_in = $this->item->sell_in - 1;
-
-        if ($this->item->sell_in >= 0) {
-            return;
+        if ($this->item->sell_in < 6) {
+            $quality += 1;
         }
 
-        $this->item->quality = 0;
+        if ($this->item->sell_in < 1) {
+            $quality = 0;
+        }
+
+        if ($quality > 50) {
+            $quality  = 50;
+        }
+
+        $this->item->quality = $quality;
+        $this->item->sell_in -= 1;
     }
 }
