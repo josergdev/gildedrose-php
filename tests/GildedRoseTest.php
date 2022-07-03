@@ -80,17 +80,27 @@ class GildedRoseTest extends TestCase
         }
     }
 
-    public function test_it_should_increase_quality_when_it_is_an_aged_brie_item(): void
+    public function provideAgedBrieCases(): array
     {
-        $items = [
-            new Item('Aged Brie', 5, 49),
+        return [
+            ['Aged Brie, 4, 50', new Item('Aged Brie', 5, 49)],
+            ['Aged Brie, 4, 50', new Item('Aged Brie', 5, 50)],
+            ['Aged Brie, -1, 50', new Item('Aged Brie', 0, 49)],
+            ['Aged Brie, -6, 7', new Item('Aged Brie', -5, 5)],
+            ['Aged Brie, -6, 50', new Item('Aged Brie', -5, 49)],
         ];
+    }
+
+    /**
+     * @dataProvider provideAgedBrieCases
+     */
+    public function test_it_should_increase_quality_when_it_is_an_aged_brie(string $expectedOutput, Item $inputAgedBrieItem): void
+    {
+        $items = [$inputAgedBrieItem];
         $gildedRose = new GildedRose($items);
 
         $gildedRose->updateQuality();
 
-        $this->assertSame('Aged Brie', $items[0]->name);
-        $this->assertSame(4,  $items[0]->sell_in);
-        $this->assertSame(50,  $items[0]->quality);
+        $this->assertSame($expectedOutput, $items[0]->__toString());
     }
 }
