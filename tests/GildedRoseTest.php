@@ -12,6 +12,7 @@ use PHPUnit\Framework\TestCase;
  * @covers \GildedRose\GildedRose
  * @covers \GildedRose\Item
  * @covers \GildedRose\NormalItem
+ * @covers \GildedRose\AgedBrieItem
  */
 class GildedRoseTest extends TestCase
 {

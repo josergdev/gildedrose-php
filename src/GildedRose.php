@@ -30,19 +30,7 @@ final class GildedRose implements QualityUpdatable
         }
 
         if ($this->isAgedBrieItem($item)) {
-            if ($item->quality < 50) {
-                $item->quality = $item->quality + 1;
-            }
-
-            $item->sell_in = $item->sell_in - 1;
-
-            if ($item->sell_in >= 0) {
-                return;
-            }
-
-            if ($item->quality < 50) {
-                $item->quality = $item->quality + 1;
-            }
+            (new AgedBrieItem($item))->updateQuality();
             return;
         }
 
@@ -92,3 +80,4 @@ final class GildedRose implements QualityUpdatable
         return $item->name === 'Backstage passes to a TAFKAL80ETC concert';
     }
 }
+
