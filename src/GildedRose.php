@@ -19,7 +19,7 @@ final class GildedRose implements QualityUpdatable
     public function updateQuality(): void
     {
         $qualityUpdatables = array_map(
-            fn(Item $item) => match($item->name) {
+            fn(Item $item) => match ($item->name) {
                 'Sulfuras, Hand of Ragnaros' => new LegendaryItem($item),
                 'Backstage passes to a TAFKAL80ETC concert' => new BackstageItem($item),
                 'Aged Brie' => new VelocityItem($item, -1),

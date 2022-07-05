@@ -12,7 +12,7 @@ final class BackstageItem implements QualityUpdatable
     {
         $quality = $this->item->quality + 1;
 
-        if ($this->item->sell_in < 11 ) {
+        if ($this->item->sell_in < 11) {
             $quality += 1;
         }
 
